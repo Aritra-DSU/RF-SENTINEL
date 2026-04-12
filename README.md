@@ -166,6 +166,16 @@ Enter your **Google Gemini API key** in the sidebar when the app is running. Wit
 
 ---
 
+## 📂 Dataset
+
+The raw RF signal log used to train this model is available here:
+
+👉 **[Download logged_data.csv](https://drive.google.com/drive/folders/19De4JpluyRz1xtVQkkbjRdk0iIAG9wje?usp=drive_link)**
+
+> Import this file into the project root before running `prepare_data.py`.
+
+---
+
 🔴 Alert System
 
 - Threat Level < 50% — Normal operations
