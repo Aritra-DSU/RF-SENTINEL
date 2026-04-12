@@ -170,7 +170,7 @@ Enter your **Google Gemini API key** in the sidebar when the app is running. Wit
 
 The raw RF signal log used to train this model is available here:
 
-👉 **[Download logged_data.csv]([https://drive.google.com/drive/folders/19De4JpluyRz1xtVQkkbjRdk0iIAG9wje?usp=drive_linkhttps://drive.google.com/drive/folders/19De4JpluyRz1xtVQkkbjRdk0iIAG9wje?usp=sharing])**
+👉 **[Download logged_data.csv](https://drive.google.com/drive/folders/19De4JpluyRz1xtVQkkbjRdk0iIAG9wje?usp=drive_linkhttps://drive.google.com/drive/folders/19De4JpluyRz1xtVQkkbjRdk0iIAG9wje?usp=sharing)**
 
 > Import this file into the project root before running `prepare_data.py`.
 
