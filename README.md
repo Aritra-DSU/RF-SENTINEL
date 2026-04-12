@@ -8,7 +8,15 @@ RF Sentinel is a military-grade SIGINT (Signals Intelligence) operations dashboa
 
  🖥️ Demo
 
-> Run locally with `streamlit run app.py` after following setup below.
+> ## 🖥️ Demo
+
+Run locally with:
+
+```bash
+streamlit run app.py
+```
+
+Then open your browser at **http://localhost:8501/**
 
 ---
 
