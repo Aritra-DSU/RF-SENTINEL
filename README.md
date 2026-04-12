@@ -197,3 +197,9 @@ Each scenario supports intensity levels: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL` —
 Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
 
 ---
+
+
+📁 Documentation
+
+- 📊 Architecture: docs/architecture.png  
+- 📡 API Docs: docs/api_docs.md  
