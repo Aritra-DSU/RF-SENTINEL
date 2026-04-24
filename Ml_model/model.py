@@ -28,7 +28,6 @@ model.fit(X_train, y_train)
 accuracy = model.score(X_test, y_test)
 print(f"✅ Model Accuracy: {accuracy * 100:.2f}%")
 
-# ✅ Save model
 joblib.dump(model, "model.pkl")
 
 print("✅ Model saved as model.pkl")
