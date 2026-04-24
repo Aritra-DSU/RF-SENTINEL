@@ -9,9 +9,6 @@ import pandas as pd
 import requests
 import json
 
-# ─────────────────────────────────────────────────────────────────
-#  PAGE CONFIG
-# ─────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="RF SENTINEL — SIGINT OPS",
     page_icon="⬡",
@@ -19,9 +16,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ─────────────────────────────────────────────────────────────────
-#  GLOBAL CSS — Military Ops Room: Deep Black + Red + Teal/Orange
-# ─────────────────────────────────────────────────────────────────
+
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Exo+2:wght@300;400;600;700;900&display=swap');
@@ -492,9 +487,7 @@ for k, v in defaults.items():
     if k not in st.session_state:
         st.session_state[k] = v
 
-# ─────────────────────────────────────────────────────────────────
-#  CONSTANTS & HELPERS
-# ─────────────────────────────────────────────────────────────────
+
 FREQ_MIN, FREQ_MAX = 70_000_000, 160_000_000
 
 def freq_to_mhz(f): return f / 1_000_000
@@ -698,9 +691,7 @@ def record_scan(freq, strength, noise, label, conf, action):
     for b in st.session_state.radar_blips:
         b["age"] += 1
 
-# ─────────────────────────────────────────────────────────────────
-#  RED ALERT OVERLAY JS INJECTION
-# ─────────────────────────────────────────────────────────────────
+
 _tl_now = st.session_state.threat_level
 # Auto-unmute when threat drops back below threshold so alarm re-arms next time
 if _tl_now < 75 and st.session_state.mute_alarm:
@@ -723,9 +714,7 @@ components.html(f"""
 </script>
 """, height=0)
 
-# ─────────────────────────────────────────────────────────────────
-#  ALARM
-# ─────────────────────────────────────────────────────────────────
+
 components.html(f"""
 <script>
 (function() {{
@@ -782,9 +771,7 @@ components.html(f"""
 </script>
 """, height=0)
 
-# ─────────────────────────────────────────────────────────────────
-#  SIDEBAR
-# ─────────────────────────────────────────────────────────────────
+
 with st.sidebar:
     st.markdown("""
     <div style='text-align:center;padding:20px 0 24px'>
@@ -858,7 +845,7 @@ with st.sidebar:
       </div>
     </div>""", unsafe_allow_html=True)
 
-    # Notification panel in sidebar
+    
     st.markdown("<div style='margin:14px 0;height:1px;background:linear-gradient(90deg,rgba(0,229,204,0.15),transparent)'></div>", unsafe_allow_html=True)
     st.markdown("<div style='font-size:.62rem;letter-spacing:4px;color:#1e4a6a;font-family:Exo 2,sans-serif;font-weight:700;margin-bottom:8px'>RECENT ALERTS</div>", unsafe_allow_html=True)
     notifs = st.session_state.notifications[:8]
@@ -877,9 +864,7 @@ with st.sidebar:
     else:
         st.markdown("<div style='font-size:.65rem;color:#1e3a52;font-family:Space Mono,monospace'>No alerts yet</div>", unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────────────────────────
-#  HEADER BAR
-# ─────────────────────────────────────────────────────────────────
+
 h1, h2, h3, h4 = st.columns([3, 1, 1, 1])
 with h1:
     st.markdown(f"""
@@ -950,9 +935,7 @@ with h4:
         {"ALARM SILENCED" if is_muted else "ALARM ACTIVE" if st.session_state.threat_level >= 75 else "STANDBY"}
     </div>""", unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────────────────────────
-#  KPI ROW
-# ─────────────────────────────────────────────────────────────────
+
 k1, k2, k3, k4, k5 = st.columns(5)
 def kpi(col, val, lbl, color, sub=""):
     col.markdown(f"""
@@ -971,9 +954,7 @@ kpi(k5, f"{hostile_rate:.0f}%",          "HOSTILE RATE", threat_color(hostile_ra
 
 st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────────────────────────
-#  TABS
-# ─────────────────────────────────────────────────────────────────
+
 tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "SCANNER",
     "WATERFALL",
@@ -984,9 +965,6 @@ tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "EVENT LOG",
 ])
 
-# ═══════════════════════════════════════════════════════════
-#  TAB 1 — SCANNER
-# ═══════════════════════════════════════════════════════════
 with tab1:
     col_rad, col_res = st.columns([1, 1], gap="large")
 
@@ -1152,7 +1130,7 @@ draw();
 </script></body></html>"""
         components.html(radar_html, height=400, scrolling=False)
 
-    # ── ANALYSIS PANEL ──
+  
     with col_res:
         st.markdown("""
         <div class='section-header'>
@@ -1287,9 +1265,7 @@ draw();
                 st.session_state[k] = v if not isinstance(v, list) else []
             st.rerun()
 
-# ═══════════════════════════════════════════════════════════
-#  TAB 2 — WATERFALL SPECTROGRAM
-# ═══════════════════════════════════════════════════════════
+
 with tab2:
     st.markdown("""
     <div class='section-header'>
@@ -1388,9 +1364,7 @@ ctx.fillStyle='rgba(0,229,204,0.06)';ctx.fillRect(0,0,2,cv.height);
 </script></body></html>"""
         components.html(wf_html, height=max(320, min(520, len(wf_data) * 20 + 100)), scrolling=True)
 
-# ═══════════════════════════════════════════════════════════
-#  TAB 3 — GEO MAP
-# ═══════════════════════════════════════════════════════════
+
 with tab3:
     st.markdown("""
     <div class='section-header'>
@@ -1487,9 +1461,7 @@ geo.forEach((p,i)=>{{
             ])
         st.markdown(log_container(rows, 220), unsafe_allow_html=True)
 
-# ═══════════════════════════════════════════════════════════
-#  TAB 4 — LIVE MONITOR
-# ═══════════════════════════════════════════════════════════
+
 with tab4:
     st.markdown("""
     <div class='section-header'>
@@ -1505,7 +1477,7 @@ with tab4:
     feed_ph   = st.empty()
     pattern_ph = st.empty()
 
-    # Spectrum visualizer placeholder
+
     spec_ph = st.empty()
 
     run_live = st.toggle("⬡  START LIVE MONITORING", key="live_toggle")
@@ -1521,7 +1493,7 @@ with tab4:
             la  = defense_action(ll)
             record_scan(lf, ls, ln, ll, lc2, la)
 
-            # Confidence chart
+           
             if len(st.session_state.conf_series) > 1:
                 conf_ph.line_chart(
                     pd.DataFrame({"Confidence %": st.session_state.conf_series}),
@@ -1529,7 +1501,6 @@ with tab4:
                     use_container_width=True,
                 )
 
-            # Live spectrum bar (real-time HTML canvas)
             live_row = []
             for i in range(64):
                 bin_freq = FREQ_MIN + (FREQ_MAX - FREQ_MIN) * i / 64
@@ -1591,9 +1562,7 @@ with tab4:
                 </div>""", unsafe_allow_html=True)
             time.sleep(1)
 
-# ═══════════════════════════════════════════════════════════
-#  TAB 5 — THREAT TIMELINE & HEATMAP
-# ═══════════════════════════════════════════════════════════
+
 with tab5:
     st.markdown("""
     <div class='section-header'>
@@ -1795,7 +1764,7 @@ window.addEventListener('load', drawAll);
 </script></body></html>"""
         components.html(timeline_html, height=560, scrolling=False)
 
-        # Stats strip
+       
         if st.session_state.threat_timeline:
             avg_t = sum(d["threat"] for d in tl_data) / len(tl_data)
             max_t = max(d["threat"] for d in tl_data)
@@ -1813,9 +1782,7 @@ window.addEventListener('load', drawAll);
                   <div class='metric-lbl'>{lbl}</div>
                 </div>""", unsafe_allow_html=True)
 
-# ═══════════════════════════════════════════════════════════
-#  TAB 6 — ATTACK SIMULATION
-# ═══════════════════════════════════════════════════════════
+
 with tab6:
     st.markdown("""
     <div class='section-header'>
@@ -1932,9 +1899,7 @@ with tab6:
               </div>
             </div>""", unsafe_allow_html=True)
 
-# ═══════════════════════════════════════════════════════════
-#  TAB 7 — EVENT LOG
-# ═══════════════════════════════════════════════════════════
+
 with tab7:
     st.markdown("""
     <div class='section-header'>
